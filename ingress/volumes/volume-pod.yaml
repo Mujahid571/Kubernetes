@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: host-path-volume
+spec:
+  restartPolicy: OnFailure
+  containers:
+  - name: busybox
+    image: busybox:stable
+    command: ['sh', '-c', 'cat /data/data.txt']
+
+    volumeMounts:
+    - name: alnafi-host-data
+      mountPath: /data
+
+  volumes:
+  - name: alnafi-host-data
+    hostPath:
+      path: /etc/host-dir
+      type: Directory
